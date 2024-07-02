@@ -3,6 +3,8 @@ import './App.css'
 import NavBar from './components/NavBar'
 import HighLights from './components/HighLights'
 import Hero from './components/Hero'
+import Model from './components/Model'
+
 
 
 const App = () => {
@@ -12,6 +14,7 @@ const App = () => {
     <NavBar/>
     <Hero/>
     <HighLights/> 
+    <Model/>
    </main>
   )
 }
