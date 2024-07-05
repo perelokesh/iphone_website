@@ -1,15 +1,16 @@
-import { Html, OrbitControls, PerspectiveCamera, View } from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera, View } from "@react-three/drei";
 import Lights from "./Lights";
 import { Suspense, MutableRefObject } from "react";
 import * as THREE from 'three';
-import Model from "./IPhone";
+import IPhone from './IPhone'
+import Loader from "./Loader";
 
 interface ModelViewProps {
   index: number;
-  groupRef: MutableRefObject<THREE.Group | null>;
+  groupRef: any;
   gsapType: string;
-  controlRef: MutableRefObject<OrbitControls | null>;
-  setRotationState: (angle: number) => void;
+  controlRef:any;
+  setRotationState: any;
   size: any;
   item: any;
 }
@@ -46,11 +47,11 @@ const ModelView: React.FC<ModelViewProps> = ({
         name={`${index === 1} ? 'small' : 'large'`}
         position={[0, 0, 0]}
       >
-        <Suspense fallback={<Html><div>Loading</div></Html>}>
-          <Model 
+        <Suspense fallback={<Loader/>}>
+          <IPhone 
           scale={index === 1 ? [15, 15, 15] : [17, 17, 17]}
-          size={size}
           item={item}
+          size={size}
            />
         </Suspense>
       </group>

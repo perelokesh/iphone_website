@@ -24,8 +24,8 @@ const Model = () => {
     });
 
     // Camera control for view 
-    const cameraControlSmall = useRef(null);
-    const cameraControlLarge = useRef(null);
+    const cameraControlSmall = useRef();
+    const cameraControlLarge = useRef();
     
     // Model
     const small = useRef(new THREE.Group());
@@ -77,7 +77,7 @@ const Model = () => {
                             size={size}
                         />
                         <ModelView 
-                            index={1}
+                            index={2}
                             groupRef={large}
                             gsapType='view2'
                             controlRef={cameraControlLarge}
@@ -96,7 +96,7 @@ const Model = () => {
                                 left: 0,
                                 overflow: 'hidden'
                             }}
-                            eventSource={document.getElementById('root')}
+                            eventSource={document.getElementById('root') as HTMLElement} 
                         >
                             <View.Port />
                         </Canvas>

@@ -1,9 +1,20 @@
-import gsap from "gsap"
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+import * as THREE from 'three';
 
-import { ScrollTrigger } from "gsap/all"
 gsap.registerPlugin(ScrollTrigger);
 
-export const animateWithGsap = (target, animationProps, scrollProps) => {
+interface AnimationProps {
+  [key: string]: any;
+}
+
+interface ScrollProps {
+  [key: string]: any;
+}
+
+export const animateWithGsap = (target: string | Element | null, animationProps: AnimationProps, scrollProps: ScrollProps) => {
+  if (!target) return;
+  
   gsap.to(target, {
     ...animationProps,
     scrollTrigger: {
@@ -12,15 +23,22 @@ export const animateWithGsap = (target, animationProps, scrollProps) => {
       start: 'top 85%',
       ...scrollProps,
     }
-  })
-}
+  });
+};
 
-export const animateWithGsapTimeline = (timeline, rotationRef, rotationState, firstTarget, secondTarget, animationProps) => {
+export const animateWithGsapTimeline = (
+  timeline: gsap.core.Timeline,
+  rotationRef: React.MutableRefObject<THREE.Group>,
+  rotationState: number,
+  firstTarget: string,
+  secondTarget: string,
+  animationProps: AnimationProps
+) => {
   timeline.to(rotationRef.current.rotation, {
     y: rotationState,
     duration: 1,
     ease: 'power2.inOut'
-  })
+  });
 
   timeline.to(
     firstTarget,
@@ -29,7 +47,7 @@ export const animateWithGsapTimeline = (timeline, rotationRef, rotationState, fi
       ease: 'power2.inOut'
     },
     '<'
-  )
+  );
 
   timeline.to(
     secondTarget,
@@ -38,5 +56,5 @@ export const animateWithGsapTimeline = (timeline, rotationRef, rotationState, fi
       ease: 'power2.inOut'
     },
     '<'
-  )
-}
+  );
+};
