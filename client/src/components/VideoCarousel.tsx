@@ -145,7 +145,7 @@ const VideoCarousel: React.FC = () => {
     }
   };
 
-  const handleLoadedMetaData = (i: number, e: Event) =>
+  const handleLoadedMetaData = (_: number, e: Event) =>
     setLoadedData((pre) => [...pre, e]);
 
   return (
@@ -174,6 +174,7 @@ const VideoCarousel: React.FC = () => {
                   onPlay={() =>
                     setVideo((pre) => ({ ...pre, isPlaying: true }))
                   }
+                  // @ts-ignore
                   onLoadedMetadata={(e) => handleLoadedMetaData(i, e)}
                 >
                   <source src={list.video} type="video/mp4" />

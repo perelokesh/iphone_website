@@ -1,6 +1,9 @@
+/* eslint-disable */
+/* @ts-ignore */
 import * as THREE from 'three';
-import React, { useEffect, useRef } from "react";
-import { useGLTF, useTexture } from "@react-three/drei";
+import React, { useEffect } from 'react';
+import { useGLTF, useTexture } from '@react-three/drei';
+// @ts-ignore
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 
 type GLTFResult = GLTF & {
@@ -15,28 +18,28 @@ type GLTFResult = GLTF & {
 interface ModelProps {
   item: {
     img: string;
-    color: [string];
+    color: string[];
   };
   [key: string]: any;
 }
 
 const Model: React.FC<ModelProps> = (props) => {
-  const { nodes, materials } = useGLTF("/models/scene.glb") as GLTFResult;
-
+  const { nodes, materials } = useGLTF('/models/scene.glb') as GLTFResult;
   const texture = useTexture(props.item.img);
 
   useEffect(() => {
     Object.entries(materials).forEach(([materialName, material]) => {
       if (
-        materialName !== "zFdeDaGNRwzccye" &&
-        materialName !== "ujsvqBWRMnqdwPx" &&
-        materialName !== "hUlRcbieVuIiOXG" &&
-        materialName !== "jlzuBkUzuJqgiAK" &&
-        materialName !== "xNrofRCqOXXHVZt"
+        materialName !== 'zFdeDaGNRwzccye' &&
+        materialName !== 'ujsvqBWRMnqdwPx' &&
+        materialName !== 'hUlRcbieVuIiOXG' &&
+        materialName !== 'jlzuBkUzuJqgiAK' &&
+        materialName !== 'xNrofRCqOXXHVZt'
       ) {
         (material as THREE.MeshStandardMaterial).color = new THREE.Color(props.item.color[0]);
+        // @ts-ignore
+        material.needsUpdate = true;
       }
-      material.needsUpdate = true;
     });
   }, [materials, props.item]);
 
@@ -263,8 +266,8 @@ const Model: React.FC<ModelProps> = (props) => {
       />
     </group>
   );
-}
+};
 
 export default Model;
 
-useGLTF.preload("/models/scene.glb");
+useGLTF.preload('/models/scene.glb');
